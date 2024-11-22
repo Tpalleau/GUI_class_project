@@ -1,23 +1,27 @@
 import PySimpleGUI as sg
 import matplotlib.pyplot as plt
 
-def setup():
-    layout = [[sg.Text("File path"), sg.FileBrowse()],
-              [sg.Text("this section will be used for plotting")],
-              [sg.Button("plot")],
-              [sg.Button("exit")]]
+class Gui:
     
-    window = sg.Window("Plot app", layout=layout)
-
-    while True:
-        event, value = window.read()
-
-        print(event, value)
+    def __init__(self):
+        self.__setup__()
         
-        if event == sg.WIN_CLOSED or event == 'exit':
-            break
-    
-    window.close()
+    def __setup__(self):
+        layout = [[sg.Text("File path"), sg.FileBrowse()],
+                [sg.Text("this section will be used for plotting")],
+                [sg.Button("plot")],
+                [sg.Button("exit")]]
+        
+        window = sg.Window("Plot app", layout=layout)
 
-if __name__ == "__main__":
-    setup()
+        def run(self):
+            while True:
+                event, value = window.read()
+
+                print(event, value)
+                
+                if event == sg.WIN_CLOSED or event == 'exit':
+                    break
+            
+            window.close()
+    
