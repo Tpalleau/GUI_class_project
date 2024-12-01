@@ -4,24 +4,29 @@ import matplotlib.pyplot as plt
 class Gui:
     
     def __init__(self):
-        self.__setup__()
+        self.path = None
+        self.__setup()
         
-    def __setup__(self):
-        layout = [[sg.Text("File path"), sg.FileBrowse()],
+    def __setup(self):
+        layout = [[sg.Text("path"), sg.Input(enable_events=True, key='-FILE-'),sg.FileBrowse(file_types=(("CSV", "*.csv"),
+                                                                                                        ("txt", "*.txt")))],
                 [sg.Text("this section will be used for plotting")],
                 [sg.Button("plot")],
                 [sg.Button("exit")]]
         
-        window = sg.Window("Plot app", layout=layout)
+        self.window = sg.Window("Plot app", layout=layout)
 
-        def run(self):
-            while True:
-                event, value = window.read()
+    def run(self):
+        while True:
+            event, value = self.window.read()
 
-                print(event, value)
-                
-                if event == sg.WIN_CLOSED or event == 'exit':
-                    break
+            print(f"event {event} \nvalue {value}")
             
-            window.close()
-    
+            if event == sg.WIN_CLOSED or event == 'exit':
+                break
+            
+            if event == '-FILE-':
+                self.path = value.get("-FILE-")
+                
+        
+        self.window.close()
